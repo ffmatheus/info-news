@@ -1,0 +1,25 @@
+version: '1.0'
+services:
+    api:
+        build: .
+        depends_on:
+            - mongodb
+        ports:
+            - "8000:8000"
+        
+    fix-mongodb-permissions:
+        image: 'bitnami/mongodb:latest'
+        user: root
+        command: chown -R 1001:1001 /bitnami
+        volumes:
+        - "./data:/bitnami"
+    mongodb:
+        image: 'bitnami/mongodb'
+        ports:
+        - "27017:27017"
+        volumes:
+        - ./data:/bitnami:rw
+        depends_on:
+        - fix-mongodb-permissions
+volumes:
+  mongodata:
