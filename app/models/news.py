@@ -10,7 +10,7 @@ from typing import Optional, Any
 class News(Document):
     tittle: str
     content: str
-    date_insert: datetime.datetime
+    date_insert: Optional[datetime.datetime]
 
     class Config:
         schema_extra = {

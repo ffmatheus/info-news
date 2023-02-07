@@ -6,6 +6,8 @@ from app.models.news import News
 
 from typing import List, Union
 
+from datetime import datetime
+
 news_collection = News
 
 
@@ -21,6 +23,7 @@ async def retrieve_unique_news(id: PydanticObjectId) -> News:
 
 
 async def create_news_data(news: News) -> News:
+    news.date_insert = datetime.now()
     news = await news.create()
     return news
 
